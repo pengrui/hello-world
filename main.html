@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src = "static/js/echarts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>test</title>
+</head>
+<body>
+    <div>
+        <select id="select-box" onchange="gradeChange()">
+            <option selected disabled value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+<!--        <span>Selected: {{ selected }}</span>-->
+    </div>
+
+    <div id="main" style="width: 600px;height:400px;"></div>
+
+        <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var tableid = document.getElementById('select-box').innerHTML;
+        // 指定图表的配置项和数据
+        option = {
+    xAxis: {
+<!--        type: 'category',-->
+<!--        boundaryGap: false,-->
+<!--        data: ['0', '20', '40', '60', '80', '100',]-->
+    },
+    yAxis: {
+<!--        type: 'value',-->
+    },
+    series: [{
+        type: 'line',
+        data: [
+               [5, 5],
+               [10,10],
+               [12,30],
+               [20,8]
+               ]
+<!--        data: [150, 230, 224, 218, 135, 147, 260],-->
+<!--        type: 'line'-->
+           },
+           {
+         type: 'line',
+         data: [
+               [5, 2],
+               [10,8],
+               [14,120],
+               [20,5]
+               ]
+               }]
+}
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+<!--&lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;!>-->
+<!--            function fetchData(cb) {-->
+<!--    // 通过 setTimeout 模拟异步加载-->
+<!--    setTimeout(function () {-->
+<!--        cb({-->
+<!--            categories: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],-->
+<!--            data: [5, 20, 36, 10, 10, 20]-->
+<!--        });-->
+<!--    }, 1000);-->
+<!--}-->
+
+     function gradeChange() {
+     var obj = document.getElementById('select-box')
+     var sIndex=obj.selectedIndex; //获取下拉列表的索引
+     var sValue=obj.options[sIndex].value; //获取所选择的值
+         if (sValue == 'A') {
+             data = {
+<!--                   categories : [10, 20, 30, 40, 60, 80, 100],-->
+                   data: [[5,5],  [10,30], [20,60], [40,5], [50,80]]
+                   }
+                   }
+         else if (sValue == 'B') {
+             data = {
+<!--                   categories : ['10', '20', '30', '40', '60', '80'],-->
+                   data: [[5,-10],  [10,20], [20,80], [40,50], [50,10]]
+                   }
+                   }
+         else {
+             data = {
+<!--                   categories : ['10', '20', '30', '40'],-->
+                   data: [5, 60, 30, 5]
+                   }
+                   }
+
+
+         myChart.setOption({
+         xAxis: {
+             data: data.categories
+         },
+         series: [{
+             // 根据名字对应到相应的系列
+             name: tableid,
+             data: data.data
+         }]
+     })
+    }
+    </script>
+
+<!--    <script>-->
+<!--    new Vue({-->
+<!--    el: '#select-box',-->
+<!--    data: {-->
+<!--    selected: ''-->
+<!--          }-->
+<!--    })-->
+
+<!--    </script>-->
+
+<!--<script>-->
+<!--// 为给定 ID 的 user 创建请求-->
+<!--new Vue({-->
+<!--    el: "#test1",-->
+<!--    data() {-->
+<!--        return {-->
+<!--             info : null-->
+<!--             }-->
+<!--             },-->
+<!--    mounted() {-->
+<!--    axios-->
+<!--    .get("https://api.apiopen.top/getJoke?page=1&count=2&type=video")-->
+<!--    .then(response => this.info = response.data)-->
+<!--    }-->
+<!--  })-->
+<!--</script>-->
+</body>
+</html>
